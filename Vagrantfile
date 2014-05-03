@@ -17,8 +17,8 @@ Vagrant.configure("2") do |config|
 
     server.vm.provision :chef_client do |chef|
       chef.chef_server_url        = ENV['CHEF_SERVER']
-      chef.validation_client_name = "chef-validator"
-      chef.validation_key_path    = ENV['CHEF_SERVER_VALIDATOR']
+      chef.validation_client_name = ENV['CHEF_VALIDATOR_CLIENT']
+      chef.validation_key_path    = ENV['CHEF_VALIDATOR_KEY']
 
       chef.run_list = [
           "recipe[go_cluster::server]"
@@ -32,8 +32,8 @@ Vagrant.configure("2") do |config|
 
     agent.vm.provision :chef_client do |chef|
       chef.chef_server_url        = ENV['CHEF_SERVER']
-      chef.validation_client_name = "chef-validator"
-      chef.validation_key_path    = ENV['CHEF_SERVER_VALIDATOR']
+      chef.validation_client_name = ENV['CHEF_VALIDATOR_CLIENT']
+      chef.validation_key_path    = ENV['CHEF_VALIDATOR_KEY']
 
       chef.run_list = [
           "recipe[go_cluster::agent]"
